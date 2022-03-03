@@ -16,7 +16,14 @@ scriptProcessor.onaudioprocess = function(e) {
     let maxVal = Math.max.apply(Math, buffer);
     let value = maxVal*100;
     // 输出分贝
-    console.log(value);
+    // console.log(value);
     // TODO
-    // gainNode.gain.value = ?
+    console.log(getGain(value))
+    gainNode.gain.value = getGain(value);
+}
+
+function getGain(x) {
+    let k = -0.95 / 90;
+    let b = 1 - 10*k;
+    return k * x + b;
 }
